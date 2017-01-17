@@ -1,11 +1,14 @@
-﻿using System;
+﻿using BangazonTaskTracker.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
 namespace BangazonTaskTracker.DAL
 {
-    public class Class1
+    public class TrackerRepo
     {
+        public TrackerContext Context { get; set; }
     }
 }

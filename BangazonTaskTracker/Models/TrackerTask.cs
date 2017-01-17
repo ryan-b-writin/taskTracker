@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BangazonTaskTracker.Models
 {
-    public class Task
+    public class TrackerTask
     {
         [Key]
         public int TaskID { get; set; }
