@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BangazonTaskTracker", "BangazonTaskTracker\BangazonTaskTracker.csproj", "{77D51DEF-6F13-4782-ABD5-E40A71E112FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BangazonTaskTracker.Tests", "BangazonTaskTracker.Tests\BangazonTaskTracker.Tests.csproj", "{5BAD3A56-0A2D-4FE5-97E8-6A0805C490A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77D51DEF-6F13-4782-ABD5-E40A71E112FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77D51DEF-6F13-4782-ABD5-E40A71E112FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77D51DEF-6F13-4782-ABD5-E40A71E112FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77D51DEF-6F13-4782-ABD5-E40A71E112FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BAD3A56-0A2D-4FE5-97E8-6A0805C490A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BAD3A56-0A2D-4FE5-97E8-6A0805C490A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BAD3A56-0A2D-4FE5-97E8-6A0805C490A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BAD3A56-0A2D-4FE5-97E8-6A0805C490A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
