@@ -10,5 +10,9 @@ namespace BangazonTaskTracker.DAL
     public class TrackerRepo
     {
         public TrackerContext Context { get; set; }
+        public TrackerRepo()
+        {
+            this.Context = new TrackerContext();
+        }
     }
 }
