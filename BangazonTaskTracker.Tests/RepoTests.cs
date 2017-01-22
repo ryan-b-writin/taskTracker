@@ -32,9 +32,9 @@ namespace BangazonTaskTracker.Tests
             tasks.As<IQueryable<TrackerTask>>().Setup(x => x.Expression).Returns(task_queryable.Expression);
             tasks.As<IQueryable<TrackerTask>>().Setup(x => x.ElementType).Returns(task_queryable.ElementType);
             tasks.As<IQueryable<TrackerTask>>().Setup(x => x.GetEnumerator()).Returns(() => task_queryable.GetEnumerator());
+
+            context.Setup(x => x.Tasks).Returns(tasks.Object);
         }
-
-
 
         [TestMethod]
         public void CanCreateInstanceOfRepo()
@@ -54,6 +54,16 @@ namespace BangazonTaskTracker.Tests
             TrackerRepo repo = new TrackerRepo(context.Object);
             Assert.IsNotNull(repo.Context);  
             Assert.AreEqual(context.Object, repo.Context); 
+        }
+        [TestMethod]
+        public void CanGetAllTasks()
+        {
+            SetUpMocksAsQueryable();
+            var repo = new TrackerRepo(context.Object);
+
+            var actualTasks = repo.GetAll();
+            
+            Assert.AreEqual(actualTasks.Count, 1); 
         }
     }
 }
