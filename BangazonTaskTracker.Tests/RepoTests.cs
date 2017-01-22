@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BangazonTaskTracker.DAL;
+using Moq;
 
 namespace BangazonTaskTracker.Tests
 {
@@ -8,6 +9,7 @@ namespace BangazonTaskTracker.Tests
     public class RepoTests
     {
         public TrackerRepo repo { get; set; }
+        private Mock<TrackerContext> context = new Mock<TrackerContext>();
 
         [TestMethod]
         public void CanCreateInstanceOfRepo()
@@ -20,6 +22,13 @@ namespace BangazonTaskTracker.Tests
         {
             TrackerRepo repo = new TrackerRepo();
             Assert.IsNotNull(repo.Context);
+        }
+        [TestMethod]
+        public void RepositoryCanAccessContext()
+        {
+                TrackerRepo repo = new TrackerRepo(context.Object);
+                Assert.IsNotNull(repo.Context);  
+                Assert.AreEqual(context.Object, repo.Context); 
         }
     }
 }
