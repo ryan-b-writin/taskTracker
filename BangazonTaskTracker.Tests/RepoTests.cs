@@ -21,7 +21,7 @@ namespace BangazonTaskTracker.Tests
         public void SetUp()
         {
             tasks = new Mock<DbSet<TrackerTask>>();
-            task_list = new List<TrackerTask> { new TrackerTask { Name = "test_task", Status = TrackerTask.TaskStatus.ToDo, } };
+            task_list = new List<TrackerTask> { new TrackerTask { Name = "test_task", Status = TrackerTask.TaskStatus.ToDo } };
         }
 
         public void SetUpMocksAsQueryable()
@@ -32,6 +32,8 @@ namespace BangazonTaskTracker.Tests
             tasks.As<IQueryable<TrackerTask>>().Setup(x => x.Expression).Returns(task_queryable.Expression);
             tasks.As<IQueryable<TrackerTask>>().Setup(x => x.ElementType).Returns(task_queryable.ElementType);
             tasks.As<IQueryable<TrackerTask>>().Setup(x => x.GetEnumerator()).Returns(() => task_queryable.GetEnumerator());
+
+            tasks.Setup(t => t.Add(It.IsAny<TrackerTask>())).Callback((TrackerTask task) => task_list.Add(task));
 
             context.Setup(x => x.Tasks).Returns(tasks.Object);
         }
@@ -64,6 +66,20 @@ namespace BangazonTaskTracker.Tests
             var actualTasks = repo.GetAll();
             
             Assert.AreEqual(actualTasks.Count, 1); 
+        }
+        [TestMethod]
+        public void CanAddTask()
+        {
+            //Arrange
+            SetUpMocksAsQueryable();
+            var repo = new TrackerRepo(context.Object);//my Mock context
+            TrackerTask testTask = new TrackerTask { Name = "test_task", Status = TrackerTask.TaskStatus.ToDo };
+
+            //Act
+            repo.Add(testTask);
+
+            tasks.Verify(x => x.Add(testTask), Times.Once); //Moq Testing Methods
+            Assert.IsTrue(task_list.Contains(testTask));
         }
     }
 }
