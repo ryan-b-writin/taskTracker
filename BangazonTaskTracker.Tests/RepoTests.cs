@@ -5,6 +5,7 @@ using Moq;
 using System.Collections.Generic;
 using BangazonTaskTracker.Models;
 using System.Data.Entity;
+using System.Linq;
 
 namespace BangazonTaskTracker.Tests
 {
@@ -22,6 +23,18 @@ namespace BangazonTaskTracker.Tests
             tasks = new Mock<DbSet<TrackerTask>>();
             task_list = new List<TrackerTask> { new TrackerTask { Name = "test_task", Status = TrackerTask.TaskStatus.ToDo, } };
         }
+
+        public void SetUpMocksAsQueryable()
+        {
+            var task_queryable = task_list.AsQueryable();
+
+            tasks.As<IQueryable<TrackerTask>>().Setup(x => x.Provider).Returns(task_queryable.Provider);
+            tasks.As<IQueryable<TrackerTask>>().Setup(x => x.Expression).Returns(task_queryable.Expression);
+            tasks.As<IQueryable<TrackerTask>>().Setup(x => x.ElementType).Returns(task_queryable.ElementType);
+            tasks.As<IQueryable<TrackerTask>>().Setup(x => x.GetEnumerator()).Returns(() => task_queryable.GetEnumerator());
+        }
+
+
 
         [TestMethod]
         public void CanCreateInstanceOfRepo()
