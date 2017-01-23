@@ -70,16 +70,46 @@ namespace BangazonTaskTracker.Tests
         [TestMethod]
         public void CanAddTask()
         {
-            //Arrange
             SetUpMocksAsQueryable();
-            var repo = new TrackerRepo(context.Object);//my Mock context
-            TrackerTask testTask = new TrackerTask { Name = "test_task", Status = TrackerTask.TaskStatus.ToDo };
+            var repo = new TrackerRepo(context.Object);
+            TrackerTask testTask = new TrackerTask { Name = "a new task", Status = TrackerTask.TaskStatus.ToDo };
 
-            //Act
             repo.Add(testTask);
 
-            tasks.Verify(x => x.Add(testTask), Times.Once); //Moq Testing Methods
+            tasks.Verify(x => x.Add(testTask), Times.Once); 
             Assert.IsTrue(task_list.Contains(testTask));
+        }
+        [TestMethod]
+        public void CanEditTask()
+        {
+            SetUpMocksAsQueryable();
+            var repo = new TrackerRepo(context.Object);
+            TrackerTask taskToEdit = task_list.FirstOrDefault(u => u.Name == "test_task");
+            int edited_task_id = taskToEdit.TaskID;
+            string expected_name = "edited name";
+            string expected_description = "edited description";
+            TaskInput editInput = new TaskInput { TaskID = edited_task_id, Name = expected_name, Description = expected_description, Status = TaskInput.TaskStatus.Complete };
+            TrackerTask edited_task = task_list.FirstOrDefault(t => t.TaskID == edited_task_id);
+
+            repo.editTask(editInput);
+
+            string actual_name = edited_task.Name;
+            string actual_description = edited_task.Description;
+
+            Assert.AreEqual(expected_name, actual_name);
+            Assert.AreEqual(expected_description, actual_description);
+            Assert.IsTrue(edited_task.Status == TrackerTask.TaskStatus.Complete);
+            
+        }
+        [TestMethod]
+        public void SetDateTimeWhenCompleted()
+        {
+
+        }
+        [TestMethod]
+        public void ReturnListByStatus()
+        {
+
         }
     }
 }

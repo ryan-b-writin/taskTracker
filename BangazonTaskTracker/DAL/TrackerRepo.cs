@@ -29,5 +29,27 @@ namespace BangazonTaskTracker.DAL
             Context.Tasks.Add(Task);
             Context.SaveChanges();
         }
+
+        public void editTask(TaskInput editInput)
+        {
+            TrackerTask taskToEdit = Context.Tasks.FirstOrDefault(t => t.TaskID == editInput.TaskID);
+
+            taskToEdit.Name = editInput.Name;
+            taskToEdit.Description = editInput.Description;
+            if (editInput.Status == TaskInput.TaskStatus.ToDo)
+            {
+                taskToEdit.Status = TrackerTask.TaskStatus.ToDo;
+            }
+            else if (editInput.Status == TaskInput.TaskStatus.InProgress)
+            {
+                taskToEdit.Status = TrackerTask.TaskStatus.InProgress;
+            }
+            else if (editInput.Status == TaskInput.TaskStatus.Complete)
+            {
+                taskToEdit.Status = TrackerTask.TaskStatus.Complete;
+            }
+
+            Context.SaveChanges();
+        }
     }
 }
