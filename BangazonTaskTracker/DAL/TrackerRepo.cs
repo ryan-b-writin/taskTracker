@@ -52,5 +52,10 @@ namespace BangazonTaskTracker.DAL
 
             Context.SaveChanges();
         }
+
+        public List<TrackerTask> GetTasksByStatus(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -105,7 +105,19 @@ namespace BangazonTaskTracker.Tests
         [TestMethod]
         public void ReturnListByStatus()
         {
+            SetUpMocksAsQueryable();
+            var repo = new TrackerRepo(context.Object);
 
+            List<TrackerTask> todo_tasks = repo.GetTasksByStatus(0);
+            List<TrackerTask> in_progress_tasks = repo.GetTasksByStatus(1);
+
+            int expected_todo_length = 1;
+            int actual_todo_length = todo_tasks.Count;
+            int expected_progress_length = 0;
+            int actual_progress_length = in_progress_tasks.Count();
+
+            Assert.AreEqual(expected_todo_length, actual_todo_length);
+            Assert.AreEqual(expected_progress_length, actual_progress_length);
         }
     }
 }
