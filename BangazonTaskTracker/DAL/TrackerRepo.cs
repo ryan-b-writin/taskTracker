@@ -55,7 +55,19 @@ namespace BangazonTaskTracker.DAL
 
         public List<TrackerTask> GetTasksByStatus(int v)
         {
-            throw new NotImplementedException();
+            if (v == 0)
+            {
+                return Context.Tasks.Where(t => t.Status == TrackerTask.TaskStatus.ToDo).ToList();
+            }
+            else if ( v == 1)
+            {
+                return Context.Tasks.Where(t => t.Status == TrackerTask.TaskStatus.InProgress).ToList();
+            }
+            else if (v == 2 )
+            {
+                return Context.Tasks.Where(t => t.Status == TrackerTask.TaskStatus.Complete).ToList();
+            }
+            return null;
         }
     }
 }
