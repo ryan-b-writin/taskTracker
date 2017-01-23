@@ -46,13 +46,18 @@ namespace BangazonTaskTracker.DAL
             }
             else if (editInput.Status == TaskInput.TaskStatus.Complete)
             {
-                taskToEdit.Status = TrackerTask.TaskStatus.Complete;
-                taskToEdit.CompletedOn = DateTime.Now;
+                //check if task is already marked completed to avoid resetting CompletedOn date
+                if (taskToEdit.Status != TrackerTask.TaskStatus.Complete)
+                {
+                    taskToEdit.Status = TrackerTask.TaskStatus.Complete;
+                    taskToEdit.CompletedOn = DateTime.Now;
+                }
             }
 
             Context.SaveChanges();
         }
 
+        //0 returns ToDo tasks, 1 returns InProgress tasks, 2 returns completed tasks
         public List<TrackerTask> GetTasksByStatus(int v)
         {
             if (v == 0)
