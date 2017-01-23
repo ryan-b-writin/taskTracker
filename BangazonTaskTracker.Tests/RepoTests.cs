@@ -90,6 +90,7 @@ namespace BangazonTaskTracker.Tests
             string expected_description = "edited description";
             TaskInput editInput = new TaskInput { TaskID = edited_task_id, Name = expected_name, Description = expected_description, Status = TaskInput.TaskStatus.Complete };
             TrackerTask edited_task = task_list.FirstOrDefault(t => t.TaskID == edited_task_id);
+            Assert.AreNotEqual(edited_task.CompletedOn.Year, DateTime.Now.Year);
 
             repo.editTask(editInput);
 
@@ -99,12 +100,7 @@ namespace BangazonTaskTracker.Tests
             Assert.AreEqual(expected_name, actual_name);
             Assert.AreEqual(expected_description, actual_description);
             Assert.IsTrue(edited_task.Status == TrackerTask.TaskStatus.Complete);
-            
-        }
-        [TestMethod]
-        public void SetDateTimeWhenCompleted()
-        {
-
+            Assert.AreEqual(edited_task.CompletedOn.Year, DateTime.Now.Year);  
         }
         [TestMethod]
         public void ReturnListByStatus()

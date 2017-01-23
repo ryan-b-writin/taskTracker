@@ -47,6 +47,7 @@ namespace BangazonTaskTracker.DAL
             else if (editInput.Status == TaskInput.TaskStatus.Complete)
             {
                 taskToEdit.Status = TrackerTask.TaskStatus.Complete;
+                taskToEdit.CompletedOn = DateTime.Now;
             }
 
             Context.SaveChanges();
