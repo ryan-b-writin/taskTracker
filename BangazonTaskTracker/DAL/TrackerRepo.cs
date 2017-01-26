@@ -72,7 +72,10 @@ namespace BangazonTaskTracker.DAL
             {
                 return Context.Tasks.Where(t => t.Status == TrackerTask.TaskStatus.Complete).ToList();
             }
-            return null;
+            else
+            {
+                return GetAll();
+            }
         }
     }
 }
