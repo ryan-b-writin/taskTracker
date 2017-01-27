@@ -13,7 +13,7 @@ You may input any INT value in as the taskType value as in the example above.
 
 Any other INT returns a list of all tasks.
 
-Sample Request URL (you will need a different localhost):
+Sample Request URL (you will need a different localhost):  
 http://localhost:49763/task?taskType=2
 
 ##POST: 
@@ -23,7 +23,7 @@ Post JSON must include the following: Name (String), and completionCode (INT). Y
 
 Completion codes: 0 = To do, 1 = In Progress , 2 = Complete (this will set the new Task's CompletedOn date to the current date)
 
-Sample Request URL (you will need a different localhost):
+Sample Request URL (you will need a different localhost):  
 http://localhost:49763/task  
 
 Sample JSON:
@@ -41,7 +41,7 @@ Put JSON must include the following: TaskID (INT), Name (String), and completion
 
 Completion codes: 0 = To do, 1 = In Progress , 2 = Complete (this will set the new Task's CompletedOn date to the current date)
 
-Sample Request (You will use a different localhost value):
+Sample Request (You will use a different localhost value):  
 http://localhost:49763/task  
 
 Sample JSON:
